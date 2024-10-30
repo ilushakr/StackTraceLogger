@@ -1,0 +1,12 @@
+ private fun getStackTrace(traceDeep: Int = 15): String {
+        val stackTrace = Thread.currentThread().stackTrace
+        val stackTraceSize = if (stackTrace.size > traceDeep) traceDeep else stackTrace.size
+        var shift = ""
+        val stB = StringBuilder("")
+        for (x in 0 until stackTraceSize) {
+            val stTrElem = stackTrace[x]
+            stB.append("$shift${stTrElem.className}.${stTrElem.methodName}(lineNumber:${stTrElem.lineNumber})\n")
+            shift += " "
+        }
+        return stB.toString().trimEnd()
+    }
